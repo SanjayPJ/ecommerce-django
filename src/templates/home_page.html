@@ -1,4 +1,5 @@
 <!doctype html>
+{% load static %}
 <html lang="en">
   <head>
     <!-- Required meta tags -->
@@ -16,8 +17,23 @@
   </head>
   <body>
     <div class="container mt-4">
-      <h1><b><u>{{ title }}</u></b></h1>
-      <p class="text-muted">{{ content }}</p>
+      <div class="row">
+        <div class="col-4">
+          <h1><b><u>{{ title }}</u></b></h1>
+          {% include "nav.html" %}
+          <p class="text-muted">{{ content }}</p>
+        </div>
+        <div class="col-6">
+          {% if user.is_authenticated %}
+          <h3>Premium Content</h3>
+          <div class="alert alert-success">
+            {{ premium_content }}
+          </div>
+          {% endif %}
+          <img src="{% static '1.jpg' %}" alt="" class="img-fluid rounded">
+        </div>
+      </div>
+      
     </div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

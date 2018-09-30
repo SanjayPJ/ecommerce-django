@@ -1,13 +1,17 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login
-from .forms import ContactForm, LoginForm
+from django.contrib.auth import authenticate, login, get_user_model
+from .forms import ContactForm, LoginForm, RegisterForm
+
+User = get_user_model()
 
 def home_page(request):
 	context = {
 		"title": "Index Page",
 		"content": "Welcome to Index Page",
 	}
+	if request.user.is_authenticated:
+		context['premium_content'] = "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex, dolorum!"
 	return render(request, "home_page.html", context)
 
 def about_page(request):
@@ -57,15 +61,27 @@ def login_page(request):
 		if user is not None:
 			login(request, user)
 			# context["form"] = LoginForm()
-			return redirect("login")
+			return redirect("admin:index")
 		else:
 			print("Error")
 
 	return render(request, "auth/login.html", context)
 
 def register_page(request):
+	register_form = RegisterForm(request.POST or None)
+	if register_form.is_valid():
+		# print(register_form.cleaned_data)
+		username = register_form.cleaned_data.get("username")
+		email = register_form.cleaned_data.get("email")
+		password = register_form.cleaned_data.get("password")
+		# print(username, email, password)
+		user = User.objects.create_user(username, email, password)
+		user.save()
+		return redirect("login")
 	context = {
-
+		"title": "Register",
+		"content": "Waiting for something?",
+		"form": register_form,
 	}
 	return render(request, "auth/register.html", context)
 
