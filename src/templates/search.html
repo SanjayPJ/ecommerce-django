@@ -1,0 +1,4 @@
+<form class="form-inline ml-auto my-lg-0" action="{% url 'products:search' %}" method="get">
+  <input name="q" class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" value="{{ request.GET.q }}">
+  <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+</form>

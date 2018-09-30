@@ -18,7 +18,7 @@
   <body>
     <div class="container mt-4">
       <div class="row">
-        <div class="col-4">
+        <div class="col-5">
           <h1><b><u>{{ title }}</u></b></h1>
           {% include "nav.html" %}
           <p class="text-muted">{{ content }}</p>
@@ -29,6 +29,8 @@
           <div class="alert alert-success">
             {{ premium_content }}
           </div>
+          {% else %}
+          <p><a href="{% url 'login' %}"><b>Login</b></a> to see <b>Premium Content</b></p>
           {% endif %}
           <img src="{% static '1.jpg' %}" alt="" class="img-fluid rounded">
         </div>

@@ -1,0 +1,10 @@
+<div class="card mt-2 d-inline-block w-50">
+	{% if i.image %}
+  <img class="card-img-top" src="{{ i.image.url }}" alt="Card image cap">
+	{% endif %}
+  <div class="card-body">
+    <h5 class="card-title">{{ i.title }}</h5>
+    <p class="card-text">{{ i.description }}</p>
+    <a href="{% url 'products:product_detail' i.slug %}" class="btn btn-primary">Details</a>
+  </div>
+</div>

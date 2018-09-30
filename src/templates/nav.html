@@ -1,8 +1,18 @@
+{% url 'home' as home_url %}
 <ul class="list-inline">
   <li class="list-inline-item"><a href="{% url 'admin:index' %}">Admin</a></li>
-  <li class="list-inline-item"><a href="{% url 'home' %}">Home</a></li>
+  <li class="list-inline-item"><a href="{% url 'home' %}" {% if request.get_full_path == home_url %}class="text-danger"{% endif %}>Home</a></li>
   <li class="list-inline-item"><a href="{% url 'about' %}">About</a></li>
   <li class="list-inline-item"><a href="{% url 'contact' %}">Contact</a></li>
   <li class="list-inline-item"><a href="{% url 'login' %}">Login</a></li>
   <li class="list-inline-item"><a href="{% url 'register' %}">Register</a></li>
+  <li class="list-inline-item"><a href="{% url 'products:product_list' %}">Product List</a></li>
+  <li class="list-inline-item"><a href="{% url 'products:product_list_f' %}">Function Based Product List</a></li>
+  <li class="list-inline-item"><a href="{% url 'products:product_detail' 't-shirt' %}">Product Detail</a></li>
+  <li class="list-inline-item"><a href="{% url 'products:featured_list'%}">Featured List</a></li>
+  <li class="list-inline-item"><a href="{% url 'products:index' %}">Index</a></li>
+  <li class="list-inline-item"><a href="{% url 'products:search' %}">Search</a></li>
+  {% if user.is_authenticated %}
+  <li class="list-inline-item"><a href="{% url 'logout' %}">Logout</a></li>
+  {% endif %}
 </ul>

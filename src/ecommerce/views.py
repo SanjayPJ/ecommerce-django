@@ -1,6 +1,6 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login, get_user_model
+from django.contrib.auth import authenticate, login, get_user_model, logout
 from .forms import ContactForm, LoginForm, RegisterForm
 
 User = get_user_model()
@@ -85,6 +85,10 @@ def register_page(request):
 	}
 	return render(request, "auth/register.html", context)
 
+def logout_page(request):
+	logout(request)
+	return redirect("home")
+
 def home_page_old1(request):
 	html_ = """
 	<!doctype html>
@@ -114,3 +118,4 @@ def home_page_old1(request):
 
 def home_page_old(request):
 	return HttpResponse("Hello World!")
+
